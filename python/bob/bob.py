@@ -1,4 +1,17 @@
 # -*- coding: utf-8 -*-
+"""
+Bob is a lackadaisical teenager. In conversation, his responses are limited.
+
+Bob answers 'Sure.' if you ask him a question.
+
+He answers 'Whoa, chill out!' if you yell at him.
+
+He says 'Fine. Be that way!' if you address him without actually saying
+anything.
+
+He answers 'Whatever.' to anything else.
+
+"""
 
 from __future__ import unicode_literals
 
@@ -20,8 +33,8 @@ def hey(message):
 
     if _is_silent(message):
         return 'Fine. Be that way!'
-    elif _is_shout(message):
+    if _is_shout(message):
         return 'Whoa, chill out!'
-    elif _is_question(message):
+    if _is_question(message):
         return 'Sure.'
     return 'Whatever.'
