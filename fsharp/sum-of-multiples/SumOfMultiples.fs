@@ -1,5 +1,5 @@
 /// Module in charge of handling SumOfMultiples
-/// 
+///
 /// SumOfMultiples:
 ///     param: list : list -> int
 ///     Members:
@@ -11,24 +11,30 @@
 /// numberModuleInList:
 ///     param: number : int
 ///     param: list : list -> int
-///     Return true if module of number and any value from list is 0, else false.
+///     Return number if module of number and any value from list is 0, else 0.
 module SumOfMultiples
 
-let rec numberModuleInList number list = 
+let rec numberModuleInList number list =
     match list with
-    | head :: rest when number % head = 0 -> true
+    | head :: rest when number % head = 0 -> number
     | head :: rest -> numberModuleInList number rest
-    | [] -> false
+    | [] -> 0
 
 type SumOfMultiples(?list) =
     member this.To number =
+        // Use default list if ?list not provided,
+        // else use value of ?list (type list -> int)
         let multipleList =
             match list with
             | l when Option.isNone l -> [3; 5]
             | _ -> list.Value
 
-        let mutable total = 0
-        for num in 1..number - 1 do
-            if numberModuleInList num multipleList then
-                total <- total + num
-        total
+        // Sum all items in list with multiple in multipleList.
+        let rec sumMultiples list =
+            match list with
+            | head :: rest ->
+                 numberModuleInList head multipleList + (sumMultiples rest)
+            | [] -> 0
+
+        // Use all postive numbers below given value.
+        sumMultiples [1..number - 1]
