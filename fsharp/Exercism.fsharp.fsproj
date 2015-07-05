@@ -73,6 +73,10 @@
     <Compile Include="sum-of-multiples\SumOfMultiples.fs" />
     <Compile Include="sum-of-multiples\SumOfMultiplesTest.fs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="difference-of-squares\DifferenceOfSquares.fs" />
+    <Compile Include="difference-of-squares\DifferenceOfSquaresTest.fs" />
+  </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
