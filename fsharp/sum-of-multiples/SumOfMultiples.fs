@@ -14,18 +14,14 @@
 module SumOfMultiples
 
 
-type SumOfMultiples(?divisors) =
-    member private this.NumberModuleInList number divisors =
+type SumOfMultiples(divisors) =
+    member private this.NumberModuleInList number =
         divisors
         |> Seq.exists (fun num -> number % num = 0)
 
     member this.To number =
-        // Use default divisors list or given int list.
-        let divisorsClean =
-            match divisors with
-            | list when Option.isNone list -> [3; 5]
-            | _ -> divisors.Value
-
         [1..number-1]
-        |> Seq.filter (fun num -> this.NumberModuleInList num divisorsClean)
+        |> Seq.filter (fun num -> this.NumberModuleInList num)
         |> Seq.sum
+
+    new() = SumOfMultiples([3; 5])
