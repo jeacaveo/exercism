@@ -1,40 +1,31 @@
 /// Module in charge of handling SumOfMultiples
 ///
 /// SumOfMultiples:
-///     param: list : list -> int
+///     param: divisors : list -> int (optional)
 ///     Members:
+///     NumberModuleInList (private):
+///         param: number : int
+///         param: divisors : lits -> int
+///         Return list -> int of numbers that are module 0 of number
 ///     To:
 ///         param: number : int
 ///         Return sum of multiples from this.list for given number.
 ///         If no list is given, 3 and 5 are used by default.
-///
-/// numberModuleInList:
-///     param: number : int
-///     param: list : list -> int
-///     Return number if module of number and any value from list is 0, else 0.
 module SumOfMultiples
 
-let rec numberModuleInList number list =
-    match list with
-    | head :: rest when number % head = 0 -> number
-    | head :: rest -> numberModuleInList number rest
-    | [] -> 0
 
-type SumOfMultiples(?list) =
+type SumOfMultiples(?divisors) =
+    member private this.NumberModuleInList number divisors =
+        divisors
+        |> Seq.exists (fun num -> number % num = 0)
+
     member this.To number =
-        // Use default list if ?list not provided,
-        // else use value of ?list (type list -> int)
-        let multipleList =
-            match list with
-            | l when Option.isNone l -> [3; 5]
-            | _ -> list.Value
+        // Use default divisors list or given int list.
+        let divisorsClean =
+            match divisors with
+            | list when Option.isNone list -> [3; 5]
+            | _ -> divisors.Value
 
-        // Sum all items in list with multiple in multipleList.
-        let rec sumMultiples list =
-            match list with
-            | head :: rest ->
-                 numberModuleInList head multipleList + (sumMultiples rest)
-            | [] -> 0
-
-        // Use all postive numbers below given value.
-        sumMultiples [1..number - 1]
+        [1..number-1]
+        |> Seq.filter (fun num -> this.NumberModuleInList num divisorsClean)
+        |> Seq.sum
