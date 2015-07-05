@@ -1,1 +1,7 @@
+# Python
 *.pyc
+
+# FSharp
+fsharp/bin/
+fsharp/obj/
+fsharp/packages/
