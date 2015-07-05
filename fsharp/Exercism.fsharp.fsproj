@@ -47,6 +47,7 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
+  <Import Project="packages\FSharpLint.0.2.3\build\FSharpLint.targets" Condition="Exists('packages\FSharpLint.0.2.3\build\FSharpLint.targets')" />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

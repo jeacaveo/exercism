@@ -12,5 +12,5 @@ type ExampleTest() =
     [<TestCase(12, 24, 36)>]
     [<TestCase(100, 1, 101)>]
     [<TestCase(2, -2, 0)>]
-    member tc.Can_add(x, y, expected) = 
+    member tc.CanAdd(x, y, expected) = 
         Assert.That(example.Add(x, y), Is.EqualTo(expected))
