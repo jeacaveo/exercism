@@ -1,13 +1,19 @@
 module DifferenceOfSquares
 
-type DifferenceOfSquares(number) =
+type DifferenceOfSquares(limit) =
+    let numbers = [1..limit]
+
+    member private this.IntPowTwo num =
+        pown num 2
+
     member this.SquareOfSums() =
-        let sum = [1..number] |> List.sum
-        pown sum 2
+        numbers
+        |> List.sum
+        |> this.IntPowTwo
 
     member this.SumOfSquares() =
-        [1..number]
-        |> List.map (fun x -> pown x 2)
+        numbers
+        |> List.map this.IntPowTwo
         |> List.sum
 
     member this.Difference() =
