@@ -5,3 +5,6 @@
 fsharp/bin/
 fsharp/obj/
 fsharp/packages/
+
+# Vim
+*.swp
