@@ -1,10 +1,14 @@
 module Bob
 
+open System.Text.RegularExpressions
 
 type Bob(message:string) =
+    member private this.IsShout() =
+        (message.ToUpper() = message && Regex.IsMatch(message, "[a-zA-Z]"))
+
     member this.Hey() =
         match message with
-        | x when message.EndsWith("?") -> "Sure."
         | x when x.Trim() = "" -> "Fine. Be that way!"
-        | x when message.ToUpper() = message -> "Whoa, chill out!"
+        | x when this.IsShout() -> "Whoa, chill out!"
+        | x when message.EndsWith("?") -> "Sure."
         | _ -> "Whatever."
